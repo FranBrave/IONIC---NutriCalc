@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { ModalModule } from './components/modal/modal.module';
+import { FooterModule } from '../components/footer/footer.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ModalModule } from './components/modal/modal.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    ModalModule
+    ModalModule,
+    FooterModule
   ],
   declarations: [HomePage]
 })
