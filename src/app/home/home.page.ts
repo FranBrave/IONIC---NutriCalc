@@ -54,7 +54,14 @@ export class HomePage {
       this.caloriasPerder = this.caloriasMinimas - 500;
       this.caloriasGanar = this.caloriasMinimas + 500;
   
-      this.consumoProteinas = this.peso * 1.2; // Asume mínimo de proteínas. Puede necesitar ajustes dependiendo de las necesidades individuales.
+      if (this.actividad == 'Sedentario') {
+        this.consumoProteinas = this.peso * 0.8;
+      } else if (this.actividad == 'Moderado') {
+        this.consumoProteinas = this.peso * 1.3;
+      } else if (this.actividad == 'Activo') {
+        this.consumoProteinas = this.peso * 1.6;
+      }
+      
     }
   
     borrar() {
