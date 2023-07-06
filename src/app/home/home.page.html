@@ -17,6 +17,11 @@
     </ion-select>
   </ion-item>
 
+  <ion-item>
+    <ion-label position="floating">Edad</ion-label>
+    <ion-input type="number" [(ngModel)]="edad"></ion-input>
+  </ion-item>
+
 
   <ion-item>
     <ion-label position="floating">Altura (cm)</ion-label>
@@ -49,6 +54,7 @@
     </ion-select>
   </ion-item>
 
+
   <ion-button color="success" expand="full" (click)="calcular()">Calcular</ion-button>
   <ion-button color="danger" expand="full" (click)="borrar()">Borrar</ion-button>
 
@@ -57,14 +63,19 @@
   <ion-card *ngIf="imc || grasaCorporal || indiceCinturaAltura || sobrepeso || caloriasMinimas || caloriasPerder || caloriasGanar || consumoProteinas">
     <ion-card-content>
       <h2>Resultados:</h2>
-      <p *ngIf="imc">IMC: {{imc | number:'1.2-2'}}</p>
-      <p *ngIf="grasaCorporal">Índice de grasa corporal: {{grasaCorporal | number:'1.2-2'}}</p>
-      <p *ngIf="indiceCinturaAltura">Índice cintura-altura: {{indiceCinturaAltura | number:'1.2-2'}}</p>
-      <p *ngIf="sobrepeso">Kg de sobrepeso: {{sobrepeso | number:'1.2-2'}}</p>
-      <p *ngIf="caloriasMinimas">Calorías mínimas necesarias: {{caloriasMinimas | number:'1.2-2'}}</p>
-      <p *ngIf="caloriasPerder">Calorías para perder 300gr/semana: {{caloriasPerder | number:'1.2-2'}}</p>
-      <p *ngIf="caloriasGanar">Calorías para ganar 300gr/semana: {{caloriasGanar | number:'1.2-2'}}</p>
-      <p *ngIf="consumoProteinas">Consumo de proteínas necesario: {{consumoProteinas | number:'1.2-2'}}</p>
+      <p class="result-highlight" *ngIf="imc">IMC: {{imc | number:'1.2-2'}}kg/m²</p>
+      <p class="result-highlight" *ngIf="grasaCorporal">Índice de grasa corporal: {{grasaCorporal | number:'1.2-2'}}%</p>
+      <p class="result-highlight" *ngIf="indiceCinturaAltura">Índice cintura-altura: {{indiceCinturaAltura | number:'1.2-2'}}</p>
+      <p class="result-highlight">Masa corporal magra: {{ masaCorporalMagra | number:'1.2-2' }} kg</p>
+      <hr>
+      <p *ngIf="enPesoIdeal()">Se encuentra dentro de un peso ideal</p>
+      <p *ngIf="!enPesoIdeal() && sobrepeso > 1">Le sobran {{sobrepeso | number:'1.0-0'}}kg para su peso ideal</p>
+      <p *ngIf="!enPesoIdeal() && sobrepeso < -1">Le faltan {{-sobrepeso | number:'1.0-0'}}kg para su peso ideal</p>
+      <p *ngIf="caloriasMinimas">Calorías mínimas necesarias: {{caloriasMinimas | number:'1.0-0'}}</p>
+      <p *ngIf="caloriasPerder">Calorías para perder 0.5kg/semana: {{caloriasPerder | number:'1.0-0'}}</p>
+      <p *ngIf="caloriasGanar">Calorías para ganar 0.5kg/semana: {{caloriasGanar | number:'1.0-0'}}</p>
+      <p *ngIf="consumoProteinas">Consumo de proteínas diarias: {{consumoProteinas | number:'1.0-0'}}gr</p>
+      <ion-button (click)="presentModal()">Advertencia</ion-button>
     </ion-card-content>
   </ion-card>
-</ion-content>
+  </ion-content>
