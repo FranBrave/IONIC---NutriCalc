@@ -1,0 +1,7 @@
+{
+  "name": "NutriCalc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
