@@ -30,3 +30,8 @@
   justify-content: center;
   margin-top: 20px;
 }
+
+.modal-background {
+  --background: var(--ion-color-dark);
+  --color: var(--ion-color-light);
+}
