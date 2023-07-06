@@ -1,20 +1,70 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      Calculadora Nutricional
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content padding>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+  <ion-item>
+    <ion-label>Sexo</ion-label>
+    <ion-select [(ngModel)]="sexo">
+      <ion-select-option value="Hombre">Hombre</ion-select-option>
+      <ion-select-option value="Mujer">Mujer</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label position="floating">Altura (cm)</ion-label>
+    <ion-input type="number" [(ngModel)]="altura"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Peso (kg)</ion-label>
+    <ion-input type="number" [(ngModel)]="peso"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Cintura (cm)</ion-label>
+    <ion-input type="number" [(ngModel)]="cintura"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Cuello (cm)</ion-label>
+    <ion-input type="number" [(ngModel)]="cuello"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="sexo === 'Mujer'">
+    <ion-label position="floating">Cadera (cm)</ion-label>
+    <ion-input type="number" [(ngModel)]="cadera"></ion-input>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label>Nivel de actividad</ion-label>
+    <ion-select [(ngModel)]="actividad">
+      <ion-select-option value="Activo">Activo</ion-select-option>
+      <ion-select-option value="Moderado">Moderado</ion-select-option>
+      <ion-select-option value="Sedentario">Sedentario</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button color="success" expand="full" (click)="calcular()">Calcular</ion-button>
+  <ion-button color="danger" expand="full" (click)="borrar()">Borrar</ion-button>
+
+
+  <!-- Resultados -->
+  <ion-card *ngIf="imc || grasaCorporal || indiceCinturaAltura || sobrepeso || caloriasMinimas || caloriasPerder || caloriasGanar || consumoProteinas">
+    <ion-card-content>
+      <h2>Resultados:</h2>
+      <p *ngIf="imc">IMC: {{imc | number:'1.2-2'}}</p>
+      <p *ngIf="grasaCorporal">Índice de grasa corporal: {{grasaCorporal | number:'1.2-2'}}</p>
+      <p *ngIf="indiceCinturaAltura">Índice cintura-altura: {{indiceCinturaAltura | number:'1.2-2'}}</p>
+      <p *ngIf="sobrepeso">Kg de sobrepeso: {{sobrepeso | number:'1.2-2'}}</p>
+      <p *ngIf="caloriasMinimas">Calorías mínimas necesarias: {{caloriasMinimas | number:'1.2-2'}}</p>
+      <p *ngIf="caloriasPerder">Calorías para perder 300gr/semana: {{caloriasPerder | number:'1.2-2'}}</p>
+      <p *ngIf="caloriasGanar">Calorías para ganar 300gr/semana: {{caloriasGanar | number:'1.2-2'}}</p>
+      <p *ngIf="consumoProteinas">Consumo de proteínas necesario: {{consumoProteinas | number:'1.2-2'}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
