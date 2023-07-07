@@ -9,6 +9,8 @@ import { ModalComponent } from './components/modal/modal.component';
   })
   export class HomePage {
 
+    system: string = 'metric';
+
       edad: number = 0;
       altura: number = 0;
       peso: number = 0;
@@ -30,32 +32,48 @@ import { ModalComponent } from './components/modal/modal.component';
       constructor(private modalController: ModalController) { }
 
       calcular() {
-        const alturaM = this.altura / 100;
+
+        let peso = this.peso;
+        let altura = this.altura;
+        let cuello = this.cuello;
+        let cintura = this.cintura;
+        let cadera = this.cadera;
+    
+        if (this.system == 'imperial') {
+          peso = this.peso * 0.453592; // convertir lb a kg
+          altura = this.altura * 2.54; // convertir in a cm
+          cuello = this.cuello * 2.54; // convertir in a cm
+          cintura = this.cintura * 2.54; // convertir in a cm
+          cadera = this.cadera * 2.54; // convertir in a cm
+        }      
+    
+        const alturaM = altura / 100;
         const log10 = (x: number) => Math.log(x) / Math.log(10);
-
-        this.imc = this.peso / (alturaM * alturaM);
-
+    
+        this.imc = peso / (alturaM * alturaM);
+    
         if (this.sexo == 'Hombre') {
-          this.grasaCorporal = 495 / (1.0324 - 0.19077 * log10(this.cintura - this.cuello) + 0.15456 * log10(this.altura)) - 450;
+          this.grasaCorporal = 495 / (1.0324 - 0.19077 * log10(cintura - cuello) + 0.15456 * log10(altura)) - 450;
         } else if (this.sexo == 'Mujer') {
-          this.grasaCorporal = 495 / (1.29579 - 0.35004 * log10(this.cintura + this.cadera - this.cuello) + 0.221 * log10(this.altura)) - 450;
+          this.grasaCorporal = 495 / (1.29579 - 0.35004 * log10(cintura + cadera - cuello) + 0.221 * log10(altura)) - 450;
         }
-
-        this.indiceCinturaAltura = this.cintura / this.altura;
-
-        const pesoIdeal = this.altura - (this.sexo == 'Hombre' ? 100 : 104);
-        this.sobrepeso = this.peso - pesoIdeal;
-
-        this.masaCorporalMagra = this.peso - this.grasaCorporal;
-
+    
+        this.indiceCinturaAltura = cintura / altura;
+    
+        //const pesoIdeal = (this.sexo == 'Hombre' ? 50 : 45.5) + 2.3 * (altura / 2.54 / 12 - 5);
+        const pesoIdeal = this.system == 'metric' ? altura - (this.sexo == 'Hombre' ? 100 : 104) : (altura - (this.sexo == 'Hombre' ? 40 : 45)) / 2.54;
+        this.sobrepeso = peso - pesoIdeal;
+    
+        this.masaCorporalMagra = peso - (peso * this.grasaCorporal / 100);
+    
         let TMB = 0;
-
+    
         if (this.sexo == 'Hombre') {
-          TMB = 66 + (13.7 * this.peso) + (5 * this.altura) - (6.8 * this.edad);
+          TMB = 66 + (13.7 * peso) + (5 * altura) - (6.8 * this.edad);
         } else if (this.sexo == 'Mujer') {
-          TMB = 655 + (9.6 * this.peso) + (1.8 * this.altura) - (4.7 * this.edad);
+          TMB = 655 + (9.6 * peso) + (1.8 * altura) - (4.7 * this.edad);
         }
-
+    
         if (this.actividad == 'Sedentario') {
           this.caloriasMinimas = TMB * 1.2;
         } else if (this.actividad == 'Moderado') {
@@ -63,18 +81,18 @@ import { ModalComponent } from './components/modal/modal.component';
         } else if (this.actividad == 'Activo') {
           this.caloriasMinimas = TMB * 1.9;
         }
-
+    
         this.caloriasPerder = this.caloriasMinimas - 500;
         this.caloriasGanar = this.caloriasMinimas + 500;
-
+    
         if (this.actividad == 'Sedentario') {
-          this.consumoProteinas = this.peso * 0.8;
+          this.consumoProteinas = peso * 0.8;
         } else if (this.actividad == 'Moderado') {
-          this.consumoProteinas = this.peso * 1.3;
+          this.consumoProteinas = peso * 1.3;
         } else if (this.actividad == 'Activo') {
-          this.consumoProteinas = this.peso * 1.6;
+          this.consumoProteinas = peso * 1.6;
         }
-      }
+    }
 
       enPesoIdeal() {
         return Math.abs(this.sobrepeso) <= 1;
