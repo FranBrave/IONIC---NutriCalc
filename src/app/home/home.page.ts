@@ -9,12 +9,12 @@ import { ModalComponent } from './components/modal/modal.component';
 })
 export class HomePage {
 
-  edad: number = 0;
-  altura: number = 0;
-  peso: number = 0;
-  cintura: number = 0;
-  cuello: number = 0;
-  cadera: number = 0;
+  edad: string = '';
+  altura: string = '';
+  peso: string = '';
+  cintura: string = '';
+  cuello: string = '';
+  cadera: string = '';
   sexo: string = '';
   actividad: string = '';
   imc: number = 0;
@@ -31,12 +31,12 @@ export class HomePage {
   constructor(private modalController: ModalController) { }
 
   calcular() {
-
-    const peso = this.peso;
-    const altura = this.altura;
-    const cuello = this.cuello;
-    const cintura = this.cintura;
-    const cadera = this.cadera;
+    const peso = Number(this.peso);
+    const altura = Number(this.altura);
+    const cuello = Number(this.cuello);
+    const cintura = Number(this.cintura);
+    const cadera = Number(this.cadera);
+    const edad = Number(this.edad);
     const alturaM = altura / 100;
     const log10 = (x: number) => Math.log(x) / Math.log(10);
 
@@ -59,12 +59,13 @@ export class HomePage {
     // Cálculo de masa magra
     this.masaCorporalMagra = peso - (peso * this.grasaCorporal / 100);
 
-    // Cálculo del TMB
-    if (this.sexo == 'Hombre') {
-      this.TMB = 66 + (13.7 * peso) + (5 * altura) - (6.8 * this.edad);
-    } else if (this.sexo == 'Mujer') {
-      this.TMB = 655 + (9.6 * peso) + (1.8 * altura) - (4.7 * this.edad);
-    }
+ // Cálculo del TMB
+if (this.sexo == 'Hombre') {
+  this.TMB = 66 + (13.7 * peso) + (5 * altura) - (6.8 * Number(this.edad));
+} else if (this.sexo == 'Mujer') {
+  this.TMB = 655 + (9.6 * peso) + (1.8 * altura) - (4.7 * Number(this.edad));
+}
+
 
     // Cálculos del TMB y consumo de proteína según la actividad física
     if (this.actividad == 'Sedentario') {
@@ -99,23 +100,23 @@ export class HomePage {
   }
 
 // Todos los valores vuelven a 0
-  borrar() {
-    this.edad = 0;
-    this.altura = 0;
-    this.peso = 0;
-    this.cintura = 0;
-    this.cuello = 0;
-    this.cadera = 0;
-    this.sexo = '';
-    this.actividad = '';
-    this.imc = 0;
-    this.grasaCorporal = 0;
-    this.indiceCinturaAltura = 0;
-    this.sobrepeso = 0;
-    this.caloriasMinimas = 0;
-    this.caloriasPerder = 0;
-    this.caloriasGanar = 0;
-    this.consumoProteinas = 0;
-    this.masaCorporalMagra = 0;
+borrar() {
+  this.edad = '';
+  this.altura = '';
+  this.peso = '';
+  this.cintura = '';
+  this.cuello = '';
+  this.cadera = '';
+  this.sexo = '';
+  this.actividad = '';
+  this.imc = 0;
+  this.grasaCorporal = 0;
+  this.indiceCinturaAltura = 0;
+  this.sobrepeso = 0;
+  this.caloriasMinimas = 0;
+  this.caloriasPerder = 0;
+  this.caloriasGanar = 0;
+  this.consumoProteinas = 0;
+  this.masaCorporalMagra = 0;
   }
 }

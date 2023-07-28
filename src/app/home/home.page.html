@@ -15,31 +15,30 @@
     </ion-select>
 </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Edad</ion-label>
-    <ion-input type="number" [(ngModel)]="edad"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Peso (kg)</ion-label>
-    <ion-input type="number" [(ngModel)]="peso"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Estatura (cm)</ion-label>
-    <ion-input type="number" [(ngModel)]="altura"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Contorno del cuello (cm)</ion-label>
-    <ion-input type="number" [(ngModel)]="cuello"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Contorno de la cintura (cm)</ion-label>
-    <ion-input type="number" [(ngModel)]="cintura"></ion-input>
-  </ion-item>
-  <ion-item *ngIf="sexo == 'Mujer'">
-    <ion-label position="floating">Contorno de la cadera (cm)</ion-label>
-    <ion-input type="number" [(ngModel)]="cadera"></ion-input>
+<ion-item>
+  <ion-label position="stacked">Edad</ion-label>
+  <ion-input type="number" placeholder="0" [(ngModel)]="edad"></ion-input>
 </ion-item>
-
+<ion-item>
+  <ion-label position="stacked">Peso (kg)</ion-label>
+  <ion-input type="number" placeholder="0" [(ngModel)]="peso"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Estatura (cm)</ion-label>
+  <ion-input type="number" placeholder="0" [(ngModel)]="altura"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Contorno del cuello (cm)</ion-label>
+  <ion-input type="number" placeholder="0" [(ngModel)]="cuello"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Contorno de la cintura (cm)</ion-label>
+  <ion-input type="number" placeholder="0" [(ngModel)]="cintura"></ion-input>
+</ion-item>
+<ion-item *ngIf="sexo == 'Mujer'">
+  <ion-label position="stacked">Contorno de la cadera (cm)</ion-label>
+  <ion-input type="number" placeholder="0" [(ngModel)]="cadera"></ion-input>
+</ion-item>
 
 <ion-item>
   <ion-select label="Nivel de actividad física" [(ngModel)]="actividad">
