@@ -1,8 +1,19 @@
 <ion-content>
   <div class="modal-wrapper">
     <ion-icon class="modal-warning-icon" name="warning-outline"></ion-icon>
-    <h2 class="modal-title">{{ title }}</h2>
-    <p class="modal-message">{{ message }}</p>
+    <h2 class="modal-title">Atención</h2>
+    <p class="modal-message">Las fórmulas utilizadas se basan en varios cálculos estándar en la ciencia de la nutrición y el ejercicio.
+<ul>
+  <li><strong>IMC (Índice de Masa Corporal): </strong>Se calcula dividiendo el peso entre la altura al cuadrado. Esta es una fórmula estándar utilizada para evaluar el peso en relación con la altura.</li>
+  <li><strong>Grasa Corporal:</strong> Las fórmulas utilizadas son las de la Marina de los Estados Unidos para hombres y mujeres. Esta es una forma común de estimar la grasa corporal utilizando medidas de cintura, cuello y cadera.</li>
+  <li><strong>Peso Ideal:</strong> Se calcula como la altura menos 100 para hombres y menos 104 para mujeres. Este es un método comúnmente utilizado para obtener una estimación aproximada del peso ideal basado en la altura. Sin embargo, no toma en cuenta otros factores como la composición muscular o el marco corporal, por lo que puede no ser preciso para todos los individuos.</li>
+  <li><strong>Índice Cintura/Altura:</strong> Es simplemente la cintura dividida por la altura. Este índice se utiliza a veces como una medida más precisa de la obesidad que el IMC.</li>
+  <li><strong>Tasa Metabólica Basal (TMB):</strong> Se calcula utilizando las ecuaciones de Harris-Benedict para hombres y mujeres, que incluyen el peso, la altura y la edad.</li>
+  <li><strong>Calorías mínimas:</strong> Esta se basa en la TMB ajustada por el nivel de actividad física. Los factores multiplicadores son los estándar utilizados para estimar las necesidades calóricas totales basadas en el nivel de actividad.</li>
+  <li><strong>Consumo de proteínas:</strong> Se basa en las recomendaciones estándar de consumo de proteínas que varían según el nivel de actividad. Las cantidades de proteínas recomendadas pueden variar dependiendo de la fuente, pero estas son recomendaciones razonables.</li>
+</ul>
+      
+     <p>Por lo tanto, estas fórmulas son comúnmente utilizadas en los campos de la nutrición y el fitness. Sin embargo, siempre es importante recordar que estos cálculos son estimaciones y pueden no ser exactos para todas las personas debido a las variaciones individuales. Es aconsejable buscar asesoramiento profesional para obtener consejos personalizados y precisos.</p>
     <div class="modal-dismiss-button">
       <ion-button color="light" (click)="dismissModal()">Cerrar</ion-button>
     </div>
