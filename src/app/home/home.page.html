@@ -8,55 +8,53 @@
 
 <ion-content padding>
 
-
   <ion-item>
-    <ion-label>Sexo</ion-label>
-    <ion-select [(ngModel)]="sexo">
+    <ion-select label="Sexo" [(ngModel)]="sexo">
       <ion-select-option value="Hombre">Hombre</ion-select-option>
       <ion-select-option value="Mujer">Mujer</ion-select-option>
     </ion-select>
-  </ion-item>
+</ion-item>
 
   <ion-item>
     <ion-label position="floating">Edad</ion-label>
     <ion-input type="number" [(ngModel)]="edad"></ion-input>
-  </ion-item>
-
-
-  <ion-item>
-    <ion-label position="floating">Altura (cm)</ion-label>
-    <ion-input type="number" [(ngModel)]="altura"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Peso (kg)</ion-label>
     <ion-input type="number" [(ngModel)]="peso"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Cintura (cm)</ion-label>
-    <ion-input type="number" [(ngModel)]="cintura"></ion-input>
+    <ion-label position="floating">Estatura (cm)</ion-label>
+    <ion-input type="number" [(ngModel)]="altura"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Cuello (cm)</ion-label>
+    <ion-label position="floating">Contorno del cuello (cm)</ion-label>
     <ion-input type="number" [(ngModel)]="cuello"></ion-input>
   </ion-item>
-  <ion-item *ngIf="sexo === 'Mujer'">
-    <ion-label position="floating">Cadera (cm)</ion-label>
-    <ion-input type="number" [(ngModel)]="cadera"></ion-input>
-  </ion-item>
-
-
   <ion-item>
-    <ion-label>Nivel de actividad</ion-label>
-    <ion-select [(ngModel)]="actividad">
-      <ion-select-option value="Activo">Activo</ion-select-option>
-      <ion-select-option value="Moderado">Moderado</ion-select-option>
-      <ion-select-option value="Sedentario">Sedentario</ion-select-option>
-    </ion-select>
+    <ion-label position="floating">Contorno de la cintura (cm)</ion-label>
+    <ion-input type="number" [(ngModel)]="cintura"></ion-input>
   </ion-item>
+  <ion-item *ngIf="sexo == 'Mujer'">
+    <ion-label position="floating">Contorno de la cadera (cm)</ion-label>
+    <ion-input type="number" [(ngModel)]="cadera"></ion-input>
+</ion-item>
 
 
-  <ion-button color="success" expand="full" (click)="calcular()">Calcular</ion-button>
-  <ion-button color="danger" expand="full" (click)="borrar()">Borrar</ion-button>
+<ion-item>
+  <ion-select label="Nivel de actividad física" [(ngModel)]="actividad">
+    <ion-select-option value="Sedentario">Sedentario (Poca o nada)</ion-select-option>
+    <ion-select-option value="Ligero">Ligera: 1-3 días/semana</ion-select-option>
+    <ion-select-option value="Moderado">Moderada: 3-5 días/semana</ion-select-option>
+    <ion-select-option value="Intenso">Intensa: 6-7 días/semana</ion-select-option>
+    <ion-select-option value="MuyIntenso">Muy Intensa (Élite)</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<div class="button-container">
+  <ion-button color="success" (click)="calcular()"><ion-icon name="calculator-outline"></ion-icon> Calcular</ion-button>
+  <ion-button color="danger" (click)="borrar()"><ion-icon name="trash-outline"></ion-icon> Borrar</ion-button>
+</div>
 
 
   <!-- Resultados -->
@@ -65,17 +63,20 @@
       <h2>Resultados:</h2>
       <p class="result-highlight" *ngIf="imc">IMC: {{imc | number:'1.2-2'}}kg/m²</p>
       <p class="result-highlight" *ngIf="grasaCorporal">Índice de grasa corporal: {{grasaCorporal | number:'1.2-2'}}%</p>
-      <p class="result-highlight" *ngIf="indiceCinturaAltura">Índice cintura-altura: {{indiceCinturaAltura | number:'1.2-2'}}</p>
+      <p class="result-highlight" *ngIf="indiceCinturaAltura">Índice cintura-estatura: {{indiceCinturaAltura | number:'1.2-2'}}</p>
       <p class="result-highlight">Masa corporal magra: {{ masaCorporalMagra | number:'1.2-2' }} kg</p>
       <hr>
       <p *ngIf="enPesoIdeal()">Se encuentra dentro de un peso ideal</p>
-      <p *ngIf="!enPesoIdeal() && sobrepeso > 1">Le sobran {{sobrepeso | number:'1.0-0'}}kg para su peso ideal</p>
-      <p *ngIf="!enPesoIdeal() && sobrepeso < -1">Le faltan {{-sobrepeso | number:'1.0-0'}}kg para su peso ideal</p>
-      <p *ngIf="caloriasMinimas">Calorías mínimas necesarias: {{caloriasMinimas | number:'1.0-0'}}</p>
-      <p *ngIf="caloriasPerder">Calorías para perder 0.5kg/semana: {{caloriasPerder | number:'1.0-0'}}</p>
-      <p *ngIf="caloriasGanar">Calorías para ganar 0.5kg/semana: {{caloriasGanar | number:'1.0-0'}}</p>
-      <p *ngIf="consumoProteinas">Consumo de proteínas diarias: {{consumoProteinas | number:'1.0-0'}}gr</p>
-      <ion-button (click)="presentModal()">Advertencia</ion-button>
+      <p *ngIf="!enPesoIdeal() && sobrepeso > 1">Le sobran {{sobrepeso | number:'1.0-0'}}kg para llegar a su peso ideal</p>
+      <p *ngIf="!enPesoIdeal() && sobrepeso < -1">Le faltan {{-sobrepeso | number:'1.0-0'}}kg para llegar a su peso ideal</p>
+      <p *ngIf="TMB">Tasa Metabólica Basal (TMB): {{TMB | number:'1.0-0'}} calorías</p>
+      <p *ngIf="caloriasMinimas">TMB ajustada a la actividad física: {{caloriasMinimas | number:'1.0-0'}} calorías</p>
+      <p *ngIf="consumoProteinas">Consumo recomendado de proteína: {{consumoProteinas | number:'1.0-0'}} gr</p>
+      <div class="at-btn-container">
+        <ion-button class="at-btn" color="danger" fill="outline" (click)="presentModal()">
+            Atención <ion-icon name="alert-outline"></ion-icon>
+        </ion-button>
+    </div>
     </ion-card-content>
   </ion-card>
   <app-footer></app-footer>
