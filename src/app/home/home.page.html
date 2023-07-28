@@ -24,7 +24,7 @@
     <ion-input type="number" [(ngModel)]="peso"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Altura (cm)</ion-label>
+    <ion-label position="floating">Estatura (cm)</ion-label>
     <ion-input type="number" [(ngModel)]="altura"></ion-input>
   </ion-item>
   <ion-item>
@@ -42,7 +42,7 @@
 
 
 <ion-item>
-  <ion-select label="Nivel de actividad" [(ngModel)]="actividad">
+  <ion-select label="Nivel de actividad física" [(ngModel)]="actividad">
     <ion-select-option value="Sedentario">Sedentario (Poca o nada)</ion-select-option>
     <ion-select-option value="Ligero">Ligera: 1-3 días/semana</ion-select-option>
     <ion-select-option value="Moderado">Moderada: 3-5 días/semana</ion-select-option>
@@ -63,7 +63,7 @@
       <h2>Resultados:</h2>
       <p class="result-highlight" *ngIf="imc">IMC: {{imc | number:'1.2-2'}}kg/m²</p>
       <p class="result-highlight" *ngIf="grasaCorporal">Índice de grasa corporal: {{grasaCorporal | number:'1.2-2'}}%</p>
-      <p class="result-highlight" *ngIf="indiceCinturaAltura">Índice cintura-altura: {{indiceCinturaAltura | number:'1.2-2'}}</p>
+      <p class="result-highlight" *ngIf="indiceCinturaAltura">Índice cintura-estatura: {{indiceCinturaAltura | number:'1.2-2'}}</p>
       <p class="result-highlight">Masa corporal magra: {{ masaCorporalMagra | number:'1.2-2' }} kg</p>
       <hr>
       <p *ngIf="enPesoIdeal()">Se encuentra dentro de un peso ideal</p>
